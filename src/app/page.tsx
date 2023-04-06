@@ -1,10 +1,26 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+'use client';
 
-const inter = Inter({ subsets: ['latin'] })
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
+import styles from './page.module.css';
+import styled, { useTheme } from 'styled-components';
+import { useThemeContext } from '@hooks/useThemeContext';
+import { useRef } from 'react';
+import Flex from '@components/Basic/Flex';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+  const theme = useTheme();
+  const { darkMode, setDarkMode } = useThemeContext();
+  // console.log('Opaaa ', theme?.default.background, darkMode);
+
+  const ref = useRef<any>(null);
+
+  const scroll = (value: number) => {
+    ref.current.scrollLeft += value;
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -44,6 +60,25 @@ export default function Home() {
           <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
         </div>
       </div>
+
+      <Wrapper ref={ref}>
+        {Array.from(Array(10).keys()).map((it, index) => {
+          return (
+            <Box
+              style={{ backgroundColor: index % 2 === 0 ? 'red' : 'blue' }}
+            ></Box>
+          );
+        })}
+      </Wrapper>
+
+      <Flex>
+        <Test onClick={() => scroll(-500)}>
+          <p>Left</p>
+        </Test>
+        <Test onClick={() => scroll(500)}>
+          <p>Right</p>
+        </Test>
+      </Flex>
 
       <div className={styles.grid}>
         <a
@@ -87,5 +122,32 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }
+
+const Test = styled.button`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: ${({ theme }) => theme.default.background};
+  max-width: 100px;
+`;
+
+const Wrapper = styled.div`
+  background-color: #333;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 500px;
+  height: 300px;
+  scroll-behavior: smooth;
+`;
+
+const Box = styled.div`
+  background: red;
+  display: inline-block;
+  width: 500px;
+  height: 350px;
+`;
