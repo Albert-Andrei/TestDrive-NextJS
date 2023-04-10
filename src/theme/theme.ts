@@ -1,14 +1,15 @@
 import { DefaultTheme } from 'styled-components';
 
-interface MediaQueries {
+type MediaQueriers = {
   maxSm?: string;
   minSm?: string;
   maxMd?: string;
   minMd?: string;
-}
+};
 
 export interface ITheme {
   default: {
+    primary: string;
     background: string;
     fontColor: string;
   };
@@ -58,13 +59,15 @@ export interface ITheme {
     xlarge: number;
     xxlarge: number;
   };
-  breakpoints: MediaQueries;
+  breakpoints: Array<string>;
+  mediaQueriers: MediaQueriers;
 }
 
 const breakpoints = ['40em', '64em'];
 
 const theme: DefaultTheme = {
   default: {
+    primary: '',
     background: '',
     fontColor: '',
   },
@@ -114,7 +117,8 @@ const theme: DefaultTheme = {
     xlarge: 30,
     xxlarge: 40,
   },
-  breakpoints: {
+  breakpoints: breakpoints,
+  mediaQueriers: {
     maxSm: `@media screen and (max-width: ${breakpoints[0]})`,
     minSm: `@media screen and (min-width: ${breakpoints[0]})`,
     maxMd: `@media screen and (max-width: ${breakpoints[1]})`,

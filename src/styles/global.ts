@@ -1,11 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-html,
+  html {
+     /* 1rem = 10px */
+  font-size: 62.5%;
+  }
+
   body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
       padding: 0;
+    font-size: 1.6rem;
   }
 
   .no-js * {

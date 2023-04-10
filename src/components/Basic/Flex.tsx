@@ -4,19 +4,12 @@ import {
   flexDirection,
   alignItems,
   justifyContent,
-  overflow,
 } from 'styled-system';
 import Box from './Box';
+import { FlexType } from '../../types/styles.types';
 
-const Flex = styled(Box)(
-  {
-    display: 'flex',
-  },
-  flexWrap,
-  flexDirection,
-  alignItems,
-  justifyContent,
-  overflow,
-);
+const Flex = styled(Box)<FlexType>`
+  display: 'flex', ${flexWrap} ${flexDirection} ${alignItems} ${justifyContent};
+`;
 
 export default Flex;

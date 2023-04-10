@@ -10,6 +10,7 @@ import {
   ThemeProvider,
 } from 'styled-components';
 import GlobalStyle from 'styles/global';
+import Box from '@components/Basic/Box';
 
 const ThemeContext = ({ children }: PropsWithChildren) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -33,7 +34,7 @@ const ThemeContext = ({ children }: PropsWithChildren) => {
     <Theme.Provider value={{ darkMode, setDarkMode }}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        {children}
+        <Box bg={theme.default.background}>{children}</Box>
       </ThemeProvider>
     </Theme.Provider>
     // <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
